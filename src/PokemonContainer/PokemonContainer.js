@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Pokemon from '../Pokemon/Pokemon';
+import './PokemonContainer.css';
 
 const PokemonContainer = ({ pokemons, isFetched, onPokemonCheck }) => {
     const pokemonsComponents = pokemons

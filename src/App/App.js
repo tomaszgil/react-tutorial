@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.numPokemons = 150;
+    this.numPokemons = 10;
     this.allPokemons = new Array(this.numPokemons);
 
     this.state = {
@@ -52,8 +52,11 @@ class App extends Component {
       });
   }
 
-  onPokemonCheck() {
+  onPokemonCheck(id) {
+    const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
+    pokemon.checked = !pokemon.checked;
 
+    console.log(this.state.pokemons);
   }
 
   render() {
