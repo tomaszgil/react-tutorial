@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
+import './Pokemon.css'
 
 const Pokemon = ({ name, id, type, img, checked, onPokemonCheck }) => {
-    return (
-      <li className="pokemon"
-          onClick={() => onPokemonCheck(id)}>
-        {id} {name} {type} {img} {checked}
-      </li>
-    );
+  const getColor = () => {
+    switch (id % 4) {
+      case 0: return '#eee9e8';
+      case 1: return '#d9f5cb';
+      case 2: return '#faf4cf';
+      case 3: return '#fde9e4';
+      default: return '#fde9e4';
+    }
+  };
+
+  const style = {
+    background: getColor()
+  };
+
+  console.log(style, id);
+
+  return (
+    <li className="pokemon"
+        onClick={() => onPokemonCheck(id)}>
+      <div className="img-background" style={style}>
+        <img src={img} />
+      </div>
+      <p>{id} {name} {type} {checked}</p>
+    </li>
+  );
 };
 
 export default Pokemon;

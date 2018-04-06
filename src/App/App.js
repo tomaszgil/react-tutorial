@@ -15,11 +15,30 @@ class App extends Component {
     };
 
     this.fetchPokemons = this.fetchPokemons.bind(this);
+    this.fakeData = this.fakeData.bind(this);
     this.onPokemonCheck = this.onPokemonCheck.bind(this);
   }
 
   componentDidMount() {
-    this.fetchPokemons();
+    // this.fetchPokemons();
+    this.fakeData();
+  }
+
+  fakeData() {
+    for (let i = 0; i < this.numPokemons; i++) {
+      this.allPokemons[i] = {
+        name: "Pikatchu",
+        id: i + 1,
+        img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i + 1}.png`,
+        type: "Some type",
+        checked: false
+      }
+    }
+
+    this.setState({
+      isFetched: true,
+      pokemons: this.allPokemons
+    });
   }
 
   fetchPokemons() {
@@ -62,9 +81,6 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <header className="app-header">
-          <h1 className="app-title">Welcome to React</h1>
-        </header>
         <PokemonContainer pokemons={this.state.pokemons} isFetched={this.state.isFetched} onPokemonCheck={this.onPokemonCheck} />
       </div>
     );

@@ -1,0 +1,17 @@
+.pokemon .img-background {
+  border-radius: 10px;
+  transition: transform 0.3s ease-out;
+}
+
+.pokemon img {
+  padding: 30px;
+  transition: transform 0.3s ease-out;
+}
+
+.pokemon .img-background:hover {
+  transform: scale(0.9);
+}
+
+.pokemon .img-background:hover img {
+  transform: scale(1.1);
+}
