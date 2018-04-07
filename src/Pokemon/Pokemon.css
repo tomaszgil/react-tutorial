@@ -14,7 +14,7 @@
 }
 
 .pokemon img {
-  padding: 40px;
+  padding: 2.5rem;
   transition: transform 0.3s ease-out;
 }
 

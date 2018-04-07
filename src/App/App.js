@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PokemonContainer from '../PokemonContainer/PokemonContainer';
+import Filter from '../Filter/Filter';
+import Search from '../Search/Search';
 import './App.css';
 
 class App extends Component {
@@ -81,6 +83,8 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <Search />
+        <Filter />
         <PokemonContainer pokemons={this.state.pokemons} isFetched={this.state.isFetched} onPokemonCheck={this.onPokemonCheck} />
       </div>
     );

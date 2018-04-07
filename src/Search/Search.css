@@ -1,0 +1,15 @@
+.search {
+
+}
+
+.search input {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: .8rem .8rem .8rem 3rem;
+  border: .2rem solid #e7e6e4;
+  border-radius: 3rem;
+}
+
+.search input:focus {
+  outline: none;
+}
