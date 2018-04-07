@@ -8,7 +8,6 @@ const Pokemon = ({ name, id, type, img, checked, onPokemonCheck }) => {
       case 1: return '#d9f5cb';
       case 2: return '#faf4cf';
       case 3: return '#fde9e4';
-      default: return '#fde9e4';
     }
   };
 
@@ -21,10 +20,15 @@ const Pokemon = ({ name, id, type, img, checked, onPokemonCheck }) => {
   return (
     <li className="pokemon"
         onClick={() => onPokemonCheck(id)}>
-      <div className="img-background" style={style}>
+      <div className="wrapper">
+        <div className="img-background" style={style} />
         <img src={img} />
       </div>
-      <p>{id} {name} {type} {checked}</p>
+      <div className="information">
+        <span className="name">{name}</span>
+        <span className="type">{type}</span>
+        <span className="id">{id}</span>
+      </div>
     </li>
   );
 };
