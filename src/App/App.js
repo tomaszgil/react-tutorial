@@ -20,6 +20,7 @@ class App extends Component {
 
     this.fetchPokemons = this.fetchPokemons.bind(this);
     this.onPokemonCheck = this.onPokemonCheck.bind(this);
+    this.updatePokemons = this.updatePokemons.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +31,6 @@ class App extends Component {
     let p = fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
       .then(blob => blob.json())
       .then(data => {
-        console.log(data);
         this.allPokemons = data.map(element => ({
           name: element.name,
           id: element.id,
@@ -50,15 +50,19 @@ class App extends Component {
   onPokemonCheck(id) {
     const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
     pokemon.checked = !pokemon.checked;
+  }
 
-    console.log(this.state.pokemons);
+  updatePokemons(pokemons) {
+    this.setState({
+      pokemons: pokemons
+    });
   }
 
   render() {
     return (
       <div className="app">
         <Logo />
-        <Search />
+        <Search onSearch={this.updatePokemons} pokemons={this.allPokemons} />
         <Menu />
         <Filter />
         <PokemonContainer pokemons={this.state.pokemons} isFetched={this.state.isFetched} onPokemonCheck={this.onPokemonCheck} />

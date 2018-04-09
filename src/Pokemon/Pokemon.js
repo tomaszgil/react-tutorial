@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import './Pokemon.css'
 
 const Pokemon = ({ name, id, type, img, checked, onPokemonCheck }) => {
-  const getColor = () => {
-    switch (id % 4) {
-      case 0: return '#eee9e8';
-      case 1: return '#d9f5cb';
-      case 2: return '#faf4cf';
-      case 3: return '#fde9e4';
-    }
+  const colors = {
+    'water': '#c5eefa',
+    'grass': '#d9f5cb',
+    'electric': '#faf4cf',
+    'fire': '#fde9e4',
+    'bug': '#efe1da',
+    'poison': '#eee9e8',
+    'normal': '#dfdffa',
+    'ground': '#dbcabc'
   };
 
   const style = {
-    background: getColor()
+    background: colors[type]
   };
-
-  console.log(style, id);
 
   return (
     <li className="pokemon"
