@@ -10,8 +10,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.numPokemons = 10;
-    this.allPokemons = new Array(this.numPokemons);
+    this.apiAccessKey = "RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh";
+    this.allPokemons = [];
 
     this.state = {
       pokemons: [],
@@ -19,60 +19,32 @@ class App extends Component {
     };
 
     this.fetchPokemons = this.fetchPokemons.bind(this);
-    this.fakeData = this.fakeData.bind(this);
     this.onPokemonCheck = this.onPokemonCheck.bind(this);
   }
 
   componentDidMount() {
-    // this.fetchPokemons();
-    this.fakeData();
-  }
-
-  fakeData() {
-    for (let i = 0; i < this.numPokemons; i++) {
-      this.allPokemons[i] = {
-        name: "Pikatchu",
-        id: i + 1,
-        img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i + 1}.png`,
-        type: "Some type",
-        checked: false
-      }
-    }
-
-    this.setState({
-      isFetched: true,
-      pokemons: this.allPokemons
-    });
+    this.fetchPokemons();
   }
 
   fetchPokemons() {
-    let promises = [];
+    let p = fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
+      .then(blob => blob.json())
+      .then(data => {
+        console.log(data);
+        this.allPokemons = data.map(element => ({
+          name: element.name,
+          id: element.id,
+          img: element.img,
+          type: element.types[0],
+          checked: false
+        }));
 
-    for (let i = 0; i < this.numPokemons; i++) {
-      let p = fetch(`https://pokeapi.co/api/v2/pokemon-form/${i + 1}/`)
-        .then(blob => blob.json())
-        .then(data => {
-          this.allPokemons[i] = {
-            name: data.name,
-            id: data.id,
-            img: data.sprites.front_default,
-            type: data.version_group.name,
-            checked: false
-          };
-        });
-
-      promises.push(p);
-    }
-
-    Promise.all(promises)
-      .then(() => {
         this.setState({
           isFetched: true,
           pokemons: this.allPokemons
         });
-      }, (err) => {
-        console.error(err);
-      });
+      })
+      .catch(err => console.error(err));
   }
 
   onPokemonCheck(id) {
