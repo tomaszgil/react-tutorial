@@ -1,3 +1,57 @@
 .filter {
+ 
+}
 
+.filter .toggle-filter {
+  text-align: right; 
+  color: #bbb;
+  padding: 15px;
+  transition: .3s;
+  font-weight: 600;
+}
+
+.filter .toggle-filter:hover {
+  cursor: pointer;
+  color: #121212;
+}
+
+.filter .toggle-filter .filter-icon {
+  transition: .3s;
+  display: inline-block;
+  width: 10px;
+  height: 2px;
+  margin: 5px;
+  background-color: #bbb;
+}
+
+.filter .toggle-filter .filter-icon::before {
+  transition: .3s;
+  content: "";
+  position: absolute;
+  background-color: #bbb;
+  display: block;
+  width: 15px;
+  height: 2px;
+  margin: 5px;
+  transform: translate(-50%, -10px);
+}
+
+.filter .toggle-filter .filter-icon::after {
+  transition: .3s;
+  content: "";
+  position: absolute;
+  background-color: #bbb;
+  display: block;
+  width: 5px;
+  height: 2px;
+  margin: 5px;
+  transform: translate(-50%, 0);
+}
+
+.filter .toggle-filter:hover .filter-icon, .filter .toggle-filter:hover .filter-icon::before, .filter .toggle-filter:hover .filter-icon::after {
+  background-color: #f95979;
+}
+
+.filter .filter-menu {
+  color: red;
 }
