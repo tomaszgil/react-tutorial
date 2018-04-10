@@ -53,11 +53,46 @@
 }
 
 .filter .filter-menu {
-  color: red;
+  display: flex;
   height: 100%;
   transition: height .3s ease-out;
 }
 
 .filter .filter-menu.hidden {
   height: 0;
+}
+
+.filter .filter-menu {
+
+}
+
+.filter .filter-menu div .category-title {
+  color: #121212;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.filter .filter-menu div .category-items {
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: #121212;
+  
+}
+
+.filter .filter-menu div .category-items div {
+  background-color: #e7e6e4;
+  color: #121212;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 15px;
+  transition: .3s;
+}
+
+.filter .filter-menu div .category-items div:hover {
+  background-color: #e7e6e4;
+  color: #121212;
+  cursor: pointer;
 }
