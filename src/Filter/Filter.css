@@ -61,11 +61,11 @@
 
 @keyframes slide-in {
   0% {
-    transform: translateY(-50px);
+    transform: translateY(-80px);
     margin-bottom: -130px;
     opacity: 0;
   }
-  40% {
+  31% {
     opacity: 0;
   }
   100% {
