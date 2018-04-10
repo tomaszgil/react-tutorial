@@ -83,12 +83,14 @@
 
 .filter .filter-menu div .category-items div {
   background-color: #e7e6e4;
+  flex: 1 0 10%;
   color: #121212;
   font-weight: 600;
   padding: 5px 10px;
   margin: 5px;
   border-radius: 15px;
   transition: .3s;
+  text-align: center;
 }
 
 .filter .filter-menu div .category-items div:hover {
