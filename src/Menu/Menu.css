@@ -3,26 +3,36 @@
   flex-direction: row;
   justify-content: space-between;
   border-bottom: .15rem solid #e7e6e4;
-  padding-bottom: 10px;
+  padding-bottom: 1rem;
 }
 
 .menu .categories, .menu .sort-by {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
-.menu .categories div {
+.menu .categories {
+  margin: 0 -15px;
+}
+
+.menu .categories .custom-checkbox {
   padding: 10px;
   margin: 5px;
   color: #bbb;
 }
 
-.menu .categories div span {
+.menu .categories .custom-checkbox label {
   font-weight: 600;
   transition: .5s;
+  cursor: pointer;
 }
 
-.menu .categories div .radio {
+.menu .categories .custom-checkbox input {
+  display: none;
+}
+
+.menu .categories .custom-checkbox .radio {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -30,15 +40,18 @@
   background-color: #e7e6e4;
   display: inline-block;
   margin: 0 5px;
-}
-
-.menu .categories div:hover {
   cursor: pointer;
-  color: #121212;
+  transition: all .3s ease-out;
 }
 
-.menu .categories div:hover .radio {
-  /* ?? */
+.menu .categories .custom-checkbox.checked .radio {
+  border-color: #ef52d1;
+  background-color: #ef52d1;
+}
+
+.menu .categories .custom-checkbox:hover,
+.menu .categories .custom-checkbox.checked {
+  color: #2a2825;
 }
 
 .menu .sort-by div {
@@ -64,6 +77,10 @@ select {
 
 select::-ms-expand {
   display: none;
+}
+
+.sorting-category {
+  margin-right: .8rem;
 }
 
 .menu .sort-by select {

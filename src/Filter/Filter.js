@@ -48,7 +48,7 @@ class Filter extends Component {
           <div className="filter-menu">
             <div className="types">
               <span className="category-title">Pokemon Type</span>
-              
+
             </div>
           </div>
         }

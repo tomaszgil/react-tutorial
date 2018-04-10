@@ -14,13 +14,15 @@ class App extends Component {
     this.allPokemons = [];
 
     this.state = {
+      filteredPokemons: [],
       pokemons: [],
       isFetched: false
     };
 
     this.fetchPokemons = this.fetchPokemons.bind(this);
     this.onPokemonCheck = this.onPokemonCheck.bind(this);
-    this.updatePokemons = this.updatePokemons.bind(this);
+    this.updateQueried = this.updateQueried.bind(this);
+    this.updateFiltered = this.updateFiltered.bind(this);
   }
 
   componentDidMount() {
@@ -36,12 +38,13 @@ class App extends Component {
           id: element.id,
           img: element.img,
           type: element.types[0],
-          checked: false
+          collected: false
         }));
 
         this.setState({
           isFetched: true,
-          pokemons: this.allPokemons
+          pokemons: [...this.allPokemons],
+          filteredPokemons: [...this.allPokemons]
         });
       })
       .catch(err => console.error(err));
@@ -49,10 +52,17 @@ class App extends Component {
 
   onPokemonCheck(id) {
     const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
-    pokemon.checked = !pokemon.checked;
+    pokemon.collected = !pokemon.collected;
   }
 
-  updatePokemons(pokemons) {
+  updateFiltered(pokemons) {
+    this.setState({
+      pokemons: pokemons,
+      filteredPokemons: pokemons
+    });
+  }
+  
+  updateQueried(pokemons) {
     this.setState({
       pokemons: pokemons
     });
@@ -62,8 +72,8 @@ class App extends Component {
     return (
       <div className="app">
         <Logo />
-        <Search onSearch={this.updatePokemons} pokemons={this.allPokemons} />
-        <Menu />
+        <Search onSearch={this.updateQueried} pokemons={this.state.filteredPokemons} />
+        <Menu onFilter={this.updateFiltered} pokemons={this.allPokemons} />
         <Filter />
         <PokemonContainer pokemons={this.state.pokemons} isFetched={this.state.isFetched} onPokemonCheck={this.onPokemonCheck} />
       </div>

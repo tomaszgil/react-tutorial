@@ -1,0 +1,37 @@
+.custom-checkbox {
+  padding: 10px;
+  margin: 5px;
+  color: #bbb;
+}
+
+.custom-checkbox label {
+  font-weight: 600;
+  transition: .5s;
+  cursor: pointer;
+}
+
+.custom-checkbox input {
+  display: none;
+}
+
+.custom-checkbox .radio {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: .15rem solid #bbb;
+  background-color: #e7e6e4;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all .3s ease-out;
+}
+
+.custom-checkbox.checked .radio {
+  border-color: #ef52d1;
+  background-color: #ef52d1;
+}
+
+.custom-checkbox:hover,
+.custom-checkbox.checked {
+  color: #2a2825;
+}

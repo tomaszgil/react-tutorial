@@ -54,4 +54,10 @@
 
 .filter .filter-menu {
   color: red;
+  height: 100%;
+  transition: height .3s ease-out;
+}
+
+.filter .filter-menu.hidden {
+  height: 0;
 }

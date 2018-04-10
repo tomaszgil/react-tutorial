@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Pokemon.css'
 
-const Pokemon = ({ name, id, type, img, checked, onPokemonCheck }) => {
+const Pokemon = ({ name, id, type, img, collected, onPokemonCheck }) => {
   const colors = {
     'water': '#c5eefa',
     'grass': '#d9f5cb',
