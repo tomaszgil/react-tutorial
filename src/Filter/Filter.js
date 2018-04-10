@@ -42,10 +42,13 @@ class Filter extends Component {
     };
 
     this.state = {
-      showMenu: false
+      showMenu: false,
+      typeFilters: new Set(['bug', 'dragon', 'ice', 'fighting', 'fire', 'flying', 'grass', 'ghost', 'ground', 'electric', 'normal', 'poison', 'psychic', 'rock', 'water'])
     };
 
     this.toggleFilter = this.toggleFilter.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
+    this.filterPokemons = this.filterPokemons.bind(this);
   }
 
   toggleFilter() {
@@ -54,9 +57,49 @@ class Filter extends Component {
     })
   }
 
+  applyFilter(e) {
+    // filter the state representing filtered types
+    // if the set contains this element, delete it from the set
+    // else, add the element to the set. then update the set
+    if (this.state.typeFilters.has(e.target.innerHTML)) {
+      const newFilters = this.state.typeFilters;
+      newFilters.delete(e.target.innerHTML);
+      this.setState({
+        typeFilters: newFilters
+      });
+      // change the class to adjust the background color
+      e.target.classList.add('disabled');
+    } else {
+      const newFilters = this.state.typeFilters;
+      newFilters.add(e.target.innerHTML);
+      this.setState({
+        typeFilters: newFilters
+      });
+      e.target.classList.remove('disabled');
+    }
+    const filteredPokemons = this.filterPokemons(this.props.pokemons);
+    this.props.onFilter(filteredPokemons);
+  }
+
+  filterPokemons(pokemons) {
+    let filteredPokemons = [];
+    pokemons.forEach(pokemon => {
+      if (this.state.typeFilters.has(pokemon.type)) {
+        filteredPokemons.push(pokemon);
+      }
+    });
+    console.log(filteredPokemons);
+    return filteredPokemons;
+  }
+
+
   render() {
     const pokemonTypes = this.pokemonTypes
-      .map(type => <div key={type} style={{backgroundColor: 'white', border: `2px solid ${this.colors[type]}`}}>{type}</div>);
+      .map(type => <div
+        key={type}
+        style={{backgroundColor: this.colors[type], border: `2px solid ${this.colors[type]}`}}
+        onClick={this.applyFilter}>{type}
+      </div>);
     return (
       <div className="filter">
         <div className="toggle-filter" onClick={this.toggleFilter}>

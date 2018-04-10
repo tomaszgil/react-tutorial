@@ -115,3 +115,7 @@
   color: #121212;
   cursor: pointer;
 }
+
+.filter .filter-menu div .category-items .disabled {
+  background-color: rgba(0,0,0,0) !important;
+}
