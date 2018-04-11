@@ -1,5 +1,10 @@
+.pokemon {
+  max-width: 20rem;
+}
+
 .pokemon .wrapper {
   position: relative;
+  position: sticky;
   text-align: center;
   cursor: pointer;
 }
