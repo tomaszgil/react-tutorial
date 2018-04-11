@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Search.css';
-import searchIcon from './search.svg';
 
 class Search extends Component {
   constructor(props) {
@@ -8,6 +7,7 @@ class Search extends Component {
     this.state = { value: '' };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   handleChange(e) {
@@ -27,11 +27,23 @@ class Search extends Component {
     this.setState({ value: query });
   }
 
+  handleClear(e) {
+    console.log("clearing");
+    e.preventDefault();
+    this.setState({
+      value: ''
+    });
+    this.props.onSearch(this.props.pokemons);
+  }
+
   render() {
     return (
       <form className="search" onSubmit={(e) => e.preventDefault()}>
-        <img src={searchIcon} className="icon" alt="logo" />
-        <input type="text" placeholder="Search" value={this.state.value} onChange={this.handleChange}/>
+        <div className="search-box">
+          <input type="text" placeholder="Search" value={this.state.value} onChange={this.handleChange}/>
+          <div className="icon" />
+          <a href="#" className={this.state.value !== '' ? "clear visible" : "clear"}  onClick={this.handleClear} />
+        </div>
       </form>
     );
   }

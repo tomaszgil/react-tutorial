@@ -1,6 +1,10 @@
 .search {
   margin: 2rem 0;
+}
+
+.search .search-box {
   position: relative;
+  display: inline-block;
 }
 
 .search input {
@@ -9,15 +13,54 @@
   padding: .8rem .8rem .8rem 3rem;
   border: .15rem solid #e7e6e4;
   border-radius: 3rem;
+  max-width: 100%;
+  width: 20rem;
+  transition: width .3s ease-out .2s;
 }
 
 .search input:focus {
   outline: none;
+  width: 30rem;
 }
 
 .search .icon {
   position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  -webkit-mask: url('search.svg') no-repeat 100% 100%;
+  mask: url('search.svg') no-repeat 100% 100%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #bbb;
   top: 50%;
   left: 1.2rem;
   transform: translateY(-50%);
+  transition: background-color .3s ease-out;
+}
+
+.search input:focus ~ .icon {
+  background-color: #2a2825;
+}
+
+.search .clear {
+  position: absolute;
+  width: .8rem;
+  height: .8rem;
+  -webkit-mask: url('close.svg') no-repeat 100% 100%;
+  mask: url('close.svg') no-repeat 100% 100%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #2a2825;
+  top: 50%;
+  right: 1.5rem;
+  transform: translate(100%, -50%);
+  opacity: 0;
+  transition: all .3s ease-out .5s;
+}
+
+
+.search input:focus ~ .clear,
+.search .clear.visible {
+  opacity: 1;
+  transform: translate(0, -50%);
 }
