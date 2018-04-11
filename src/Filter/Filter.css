@@ -1,5 +1,5 @@
 .filter {
- 
+  
 }
 
 .filter .toggle-filter {
@@ -53,11 +53,69 @@
 }
 
 .filter .filter-menu {
-  color: red;
-  height: 100%;
+  display: flex;
+  height: 130px;
   transition: height .3s ease-out;
+  animation: slide-in 1s forwards cubic-bezier(.69,.26,.36,.87);
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(-80px);
+    margin-bottom: -130px;
+    opacity: 0;
+  }
+  31% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    margin-bottom: 0px;
+    opacity: 1;
+  }
 }
 
 .filter .filter-menu.hidden {
   height: 0;
+}
+
+.filter .filter-menu {
+
+}
+
+.filter .filter-menu div .category-title {
+  color: #121212;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.filter .filter-menu div .category-items {
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: #121212;
+  
+}
+
+.filter .filter-menu div .category-items div {
+  background-color: #e7e6e4;
+  flex: 1 0 10%;
+  color: #121212;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 15px;
+  transition: .3s;
+  text-align: center;
+}
+
+.filter .filter-menu div .category-items div:hover {
+  background-color: #e7e6e4;
+  color: #121212;
+  cursor: pointer;
+}
+
+.filter .filter-menu div .category-items .disabled {
+  background-color: rgba(0,0,0,0) !important;
 }
