@@ -21,7 +21,7 @@ class Filter extends Component {
       'psychic',
       'rock',
       'water'
-    ]
+    ];
 
     this.colors = {
       'bug': '#e0e5c3',

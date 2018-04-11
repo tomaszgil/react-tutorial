@@ -74,7 +74,7 @@ class App extends Component {
         <Logo />
         <Search onSearch={this.updateQueried} pokemons={this.state.filteredPokemons} />
         <Menu onFilter={this.updateFiltered} pokemons={this.allPokemons} />
-        <Filter onFilter={this.updateFiltered} pokemons={this.allPokemons} />
+        <Filter onFilter={this.updateFiltered} pokemons={this.state.filteredPokemons} />
         <PokemonContainer pokemons={this.state.pokemons} isFetched={this.state.isFetched} onPokemonCheck={this.onPokemonCheck} />
       </div>
     );
