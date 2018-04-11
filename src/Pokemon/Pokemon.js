@@ -12,7 +12,9 @@ class Pokemon extends Component {
     this.handlePokeballClick = this.handlePokeballClick.bind(this);
   }
 
-  handlePokeballClick() {
+  handlePokeballClick(e) {
+    e.preventDefault();
+
     this.setState({
       collected: !this.state.collected
     });
@@ -42,13 +44,15 @@ class Pokemon extends Component {
         <div className="wrapper">
           <div className="img-background" style={style}/>
           <img src={this.props.img}/>
-          <a href="#" className="pokeball" onClick={this.handlePokeballClick}/>
         </div>
         <div className="information">
+          <a href="#" className="pokeball" onClick={this.handlePokeballClick}/>
           <span className="name">{this.props.name}</span>
-          <span className="type">{this.props.type}</span>
-          <span className="id">{this.props.id}</span>
-        </div>
+          <span>
+            <span className="type">{this.props.type}</span>
+            <span className="id">{this.props.id}</span>
+          </span>
+          </div>
       </li>
     );
   }

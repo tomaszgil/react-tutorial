@@ -1,7 +1,3 @@
-.pokemon {
-  max-width: 20rem;
-}
-
 .pokemon .wrapper {
   position: relative;
   position: sticky;
@@ -39,8 +35,15 @@
   flex-wrap: wrap;
 }
 
-.pokemon .id,
+.pokemon .name {
+  margin-right: .5rem;
+}
+
 .pokemon .type {
+  color: #82817d;
+}
+
+.pokemon .id {
   color: #82817d;
   margin-left: .5rem;
 }
@@ -52,20 +55,18 @@
 
 .pokemon .pokeball {
   display: inline-block;
-  position: absolute;
-  top: 8%;
-  right: 6%;
   width: 1rem;
   height: 1rem;
   -webkit-mask: url('pokeball.svg') no-repeat 100% 100%;
   mask: url('pokeball.svg') no-repeat 100% 100%;
   -webkit-mask-size: cover;
   mask-size: cover;
-  background-color: #2a2825;
-  opacity: 0.2;
+  background-color: #bbb;
+  margin-right: .4rem;
+  transform: translateY(.1rem);
   transition: all .3s ease-out;
 }
 
 .pokemon.collected .pokeball {
-  opacity: 1;
+  background-color: #ef52d1;
 }

@@ -6,7 +6,12 @@ const PokemonContainer = ({ pokemons, isFetched, onPokemonCheck }) => {
     const pokemonsComponents = pokemons
       .map(pokemon => <Pokemon key={pokemon.id} {...pokemon} onPokemonCheck={onPokemonCheck} />);
 
-    if (!isFetched) return <p className="pokemon-container-loading">Loading...</p>;
+    if (!isFetched)
+      return (
+        <div className="pokemon-container-loading">
+          <div className="pokemon" />
+        </div>
+      );
 
     return (
       <ul className="pokemon-container">

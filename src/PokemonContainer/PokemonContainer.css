@@ -4,9 +4,33 @@
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  grid-gap: 2rem;
+  grid-gap: 1.8rem;
 }
 
 .pokemon-container-loading {
+  display: flex;
+  justify-content: center;
+}
 
+.pokemon-container-loading .pokemon {
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+  -webkit-mask: url('../Pokemon/pokeball.svg') no-repeat 100% 100%;
+  mask: url('../Pokemon/pokeball.svg') no-repeat 100% 100%;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  background-color: #ddd;
+  margin: 4rem;
+  animation: 3s spin infinite cubic-bezier(0.24,-0.35, 0.04, 0.99);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(720deg);
+  }
 }
