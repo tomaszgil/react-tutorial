@@ -1,10 +1,11 @@
 import React from 'react';
 import './Logo.css';
 
-const Logo = (props) => {
+const Logo = () => {
   return (
     <div className="logo">
-      pokedex
+      <span className="icon" />
+      <span>PokeDex</span>
     </div>
   );
 };

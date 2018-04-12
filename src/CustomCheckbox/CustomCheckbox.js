@@ -15,7 +15,7 @@ class CustomCheckbox extends Component {
 
   render() {
     return (
-      <div className={this.getClassName()} onClick={() => this.props.onClick(this.props.order)}>
+      <div className={this.getClassName()} onClick={() => this.props.onClick(this.props.id)}>
         <input type="checkbox" defaultChecked={this.props.checked} />
         <span className="radio" />
         <label>{this.props.label}</label>

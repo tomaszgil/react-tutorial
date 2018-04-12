@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Pokemon.css'
+import { pokemonTypesToColors } from "../_utils/Pokemon";
 
 class Pokemon extends Component {
   constructor(props) {
@@ -23,20 +24,8 @@ class Pokemon extends Component {
   }
 
   render() {
-    // TODO global declaration of colors and types
-    const colors = {
-      'water': '#c5eefa',
-      'grass': '#d9f5cb',
-      'electric': '#faf4cf',
-      'fire': '#fde9e4',
-      'bug': '#efe1da',
-      'poison': '#eee9e8',
-      'normal': '#dfdffa',
-      'ground': '#dbcabc'
-    };
-
     const style = {
-      background: colors[this.props.type]
+      background: pokemonTypesToColors[this.props.type]
     };
 
     return (
