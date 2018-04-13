@@ -29,7 +29,7 @@ class App extends Component {
         this.allPokemons = data.map(element => ({
           name: element.name,
           id: element.id,
-          img: element.img,
+          img: element.image,
           type: element.types[0],
           collected: false
         }));
