@@ -1,21 +1,54 @@
+import React, { Component } from 'react';
+import Logo from '../Logo/Logo';
+import Search from '../Search/Search';
 import './App.css';
 
-// TODO 1.3. Import React.
-// TODO 1.4. Create App class that extends React's Component class.
-// TODO 1.5. Component should have a field to store the data fetched from API.
-// TODO 1.6. Initialize the state of the component to have a single variable that indicates whether the data has been already fetched or not.
-// TODO 1.7. Create a function that will fetch a pokemon array from this URL:
-// TODO      https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh
-// TODO      Remember to bind this function properly, if you plan to use any component’s properties.
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-// Hint. You can use the new fetch API. This is how you do that:
-//   fetch(dataURL)
-//     .then(blob => blob.json())
-//     .then(data => {
-//       // data can be processed here
-//     })
-//     .catch(err => console.error(err));
+    this.apiAccessKey = "RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh";
+    this.allPokemons = [];
 
-// TODO 1.8. Invoke this function as soon as the component is mounted onto the page.
-// TODO 1.9. We want this component to render a div with a class of app, inside of which we want to have Logo component and Search component.
-// TODO      Remember to import these components.
+    this.state = {
+      isFetched: false
+    };
+
+    this.fetchPokemons = this.fetchPokemons.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchPokemons();
+  }
+
+  fetchPokemons() {
+    let p = fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
+      .then(blob => blob.json())
+      .then(data => {
+        this.allPokemons = data.map(element => ({
+          name: element.name,
+          id: element.id,
+          img: element.image,
+          type: element.types[0],
+          collected: false
+        }));
+
+        console.table(this.allPokemons);
+
+        this.setState({
+          isFetched: true,
+        });
+      })
+      .catch(err => console.error(err));
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <Logo />
+      </div>
+    );
+  }
+}
+
+export default App;
