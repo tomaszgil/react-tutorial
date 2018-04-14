@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../Logo/Logo';
+import Search from '../Search/Search';
 import './App.css';
 
 class App extends Component {
@@ -32,8 +33,6 @@ class App extends Component {
           collected: false
         }));
 
-        console.table(this.allPokemons);
-
         this.setState({
           isFetched: true,
         });
@@ -45,6 +44,7 @@ class App extends Component {
     return (
       <div className="app">
         <Logo />
+        <Search isFetched={this.state.isFetched} pokemons={this.allPokemons} />
       </div>
     );
   }
