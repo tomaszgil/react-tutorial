@@ -43,8 +43,8 @@ class App extends Component {
 
   render() {
 // TODO Step 2
-// TODO 1.1. Import Search component and render it after Logo.
-// TODO 1.2. Pass the variable from state and the pokemons array as props in Search component.
+// TODO 2.1. Import Search component and render it after Logo.
+// TODO 2.2. Pass the variable from state and the pokemons array as props in Search component.
     return (
       <div className="app">
         <Logo />
