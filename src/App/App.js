@@ -16,6 +16,7 @@ import './App.css';
 //     })
 //     .catch(err => console.error(err));
 
+// TODO      Single pokemon should have id, name, image link, type and boolean information whether it is collected or not (initialize it with false, we will deal with it later).
 // TODO 1.8. Invoke this function as soon as the component is mounted onto the page.
 // TODO 1.9. We want this component to render a div with a class of app, inside of which we want to have Logo.
 // TODO      Remember to import the component first.
