@@ -13,5 +13,3 @@ import './SearchResults.css';
 //        <div className="pokemon" />
 //      </div>
 // TODO 1.9. Otherwise, let’s return a list with a class of pokemon-container with created Pokemon components.
-
-export default PokemonContainer;
