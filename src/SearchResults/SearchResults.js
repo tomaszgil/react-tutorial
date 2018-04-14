@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Pokemon from '../Pokemon/Pokemon';
 import './SearchResults.css';
 
-const PokemonContainer = ({ pokemons, isFetched }) => {
+const PokemonContainer = ({ pokemons, isFetched, onPokemonCheck }) => {
   const pokemonsComponents = pokemons
-    .map(pokemon => <Pokemon key={pokemon.id} {...pokemon} />);
+    .map(pokemon => <Pokemon key={pokemon.id} {...pokemon} onPokemonCheck={onPokemonCheck} />);
 
   if (!isFetched)
     return (
