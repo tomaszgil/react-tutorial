@@ -17,5 +17,5 @@ import './App.css';
 //     .catch(err => console.error(err));
 
 // TODO 1.8. Invoke this function as soon as the component is mounted onto the page.
-// TODO 1.9. We want this component to render a div with a class of app, inside of which we want to have Logo component and Search component.
-// TODO      Remember to import these components.
+// TODO 1.9. We want this component to render a div with a class of app, inside of which we want to have Logo.
+// TODO      Remember to import the component first.
