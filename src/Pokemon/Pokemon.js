@@ -12,7 +12,7 @@ class Pokemon extends Component {
 //   </div>
 //   <div className="information">
 //     <a href="#" className="pokeball" />
-//     <span className="name">Pikatchu</span>
+//     <span className="name">Pikachu</span>
 //     <span>
 //       <span className="type">electric</span>
 //       <span className="id">23</span>
