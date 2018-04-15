@@ -22,18 +22,16 @@ class Filter extends Component {
   }
 
   applyFilter(e) {
-    // filter the state representing filtered types
-    // if the set contains this element, delete it from the set
-    // else, add the element to the set. then update the set
+    const filterElement = e.target;
+    const filterName = filterElement.dataset.name;
     let newFilters = this.state.typeFilters;
 
-    if (this.state.typeFilters.has(e.target.innerHTML)) {
-      newFilters.delete(e.target.innerHTML);
-      // change the class to adjust the background color
-      e.target.classList.add('disabled');
+    if (this.state.typeFilters.has(filterName)) {
+      newFilters.delete(filterName);
+      filterElement.classList.add('disabled');
     } else {
-      newFilters.add(e.target.innerHTML);
-      e.target.classList.remove('disabled');
+      newFilters.add(filterName);
+      filterElement.classList.remove('disabled');
     }
 
     this.setState({
@@ -58,6 +56,7 @@ class Filter extends Component {
               {
                 pokemonTypes.map(type => <div
                     key={type}
+                    data-name={type}
                     style={{backgroundColor: pokemonTypesToColors[type], border: `2px solid ${pokemonTypesToColors[type]}`}}
                     onClick={this.applyFilter}>{type}
                   </div>)

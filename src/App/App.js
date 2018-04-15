@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PokemonContainer from '../SearchResults/SearchResults';
 import Logo from '../Logo/Logo';
 import Search from '../Search/Search';
 import './App.css';
@@ -23,7 +22,7 @@ class App extends Component {
   }
 
   fetchPokemons() {
-    let p = fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
+    fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
       .then(blob => blob.json())
       .then(data => {
         this.allPokemons = data.map(element => ({
