@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Menu from '../Menu/Menu';
 import SearchInput from '../SearchInput/SearchInput';
 import SearchResults from '../SearchResults/SearchResults';
+import filters from '../_utils/Filters';
 
 class Search extends Component {
   constructor(props) {
@@ -13,20 +15,29 @@ class Search extends Component {
 
     this.criteria = {
       searchQuery: '',
+      sort: {
+        key: 'id',
+        direction: 'ascending'
+      },
+      filter: {
+        collected: filters.SHOW_ALL
+      }
     };
 
+    this.handleSorting = this.handleSorting.bind(this);
     this.handleSearchQuery = this.handleSearchQuery.bind(this);
+    this.handleFilterCollected = this.handleFilterCollected.bind(this);
     this.handlePokemonStateChange = this.handlePokemonStateChange.bind(this);
+    this.sort = this.sort.bind(this);
     this.processSearchQuery = this.processSearchQuery.bind(this);
+    this.applyFilters = this.applyFilters.bind(this);
     this.updateResults = this.updateResults.bind(this);
   }
 
   componentWillReceiveProps(nextProps){
     if (nextProps.isFetched) {
       this.allPokemons = nextProps.pokemons;
-      this.setState({
-        pokemons: this.allPokemons
-      });
+      this.updateResults();
     }
   }
 
@@ -38,6 +49,48 @@ class Search extends Component {
   handlePokemonStateChange(id) {
     const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
     pokemon.collected = !pokemon.collected;
+  }
+
+  handleFilterCollected(filter) {
+    this.criteria.filter.collected = filter;
+    this.updateResults();
+  }
+
+  handleSorting(key, direction) {
+    this.criteria.sort.key = key;
+    this.criteria.sort.direction = direction;
+    this.updateResults();
+  }
+
+  sort(arr) {
+    let multiplier = 1;
+    const key = this.criteria.sort.key;
+
+    switch(this.criteria.sort.direction) {
+      case 'ascending': multiplier = 1; break;
+      case 'descending': multiplier = -1; break;
+      default: break;
+    }
+
+    return arr.sort((a, b) => {
+      if (a[key] < b[key]) return -1 * multiplier;
+      if (a[key] === b[key]) return 0;
+      if (a[key] > b[key]) return multiplier;
+
+      return 0;
+    });
+  }
+
+  applyFilters(arr) {
+    let result = [];
+    switch(this.criteria.filter.collected) {
+      case filters.SHOW_ALL: result = arr; break;
+      case filters.ONLY_COLLECTED: result = arr.filter(el => el.collected); break;
+      case filters.NOT_COLLECTED: result = arr.filter(el => !el.collected); break;
+      default: result = arr;
+    }
+
+    return result;
   }
 
   processSearchQuery(arr) {
@@ -53,15 +106,10 @@ class Search extends Component {
     });
   }
 
-// TODO Step 5.
-// TODO 5.1. Add new fields in search criteria, storing the information about sort key,
-// TODO      direction and and filter based upon whether a pokemon is collected (you can implement filter constants from _utils/Filters.js.
-// TODO 5.2. Add functions that will handle updating new search criteria and updating search results.
-// TODO 5.3. Add functions that will handle filtering and sorting given array according to current search criteria.
-// TODO      Update function responsible for updating search results. You might also add initial sorting with default criteria after fetching pokemons.
-
   updateResults() {
-    let result = this.processSearchQuery(this.allPokemons);
+    let result = this.applyFilters(this.allPokemons);
+    result = this.processSearchQuery(result);
+    result = this.sort(result);
 
     this.setState({
       pokemons: result
@@ -72,6 +120,7 @@ class Search extends Component {
     return (
       <div>
         <SearchInput onChange={this.handleSearchQuery} />
+        <Menu onFilterChange={this.handleFilterCollected} onSortChange={this.handleSorting} />
         <SearchResults pokemons={this.state.pokemons} isFetched={this.props.isFetched} onPokemonCheck={this.handlePokemonStateChange} />
       </div>
     );
