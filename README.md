@@ -3,7 +3,7 @@
 The purpose of this class is to get familiar with with React library and build a simple Pokedex web application with live search. You’ll learn how to fetch data from external API, about the idea of building UI with independent components, using state and props to update the view and pass data.
 ### Get the project’s boilerplate
 Clone the repository and switch to branch `step-1`.
-```
+```bash
 git clone https://github.com/tomaszgil/react-tutorial.git
 git checkout step-1
 ```
@@ -26,7 +26,7 @@ Go to `src/App/App.js` file. We need to write this component as a class componen
 `https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh`
 
 Hint. You can use the new Fetch API. This is how you do that:
-```
+```javascript
 fetch(dataURL)
   .then(blob => blob.json()) 
   .then(data => { 
@@ -59,7 +59,7 @@ Go to `src/SearchResults/SearchResults.js`.
 You can map over pokemon object received through props, returning Pokemon component to which you will pass all pokemon object’s fields as separate props. React will know how to deal with rendering an array of components. Remember to add a unique key property to the component, when you create lists of element.
 
 2.8. When data is not fetched, let’s have the component return:
-```
+```html
 <div className="pokemon-container-loading">
   <div className="pokemon" />
 </div>
@@ -79,9 +79,9 @@ We need to pass that function down to Pokemon itself. Go to src/SearchResults/Se
 Now we can focus on Pokemon component itself.
 
 3.5. It should have a state with a variable indicating whether it’s collected or not (as we will make some styling changes based upon that).
-3.6. Add a method to handle click event on the pokemon. It should toggle the collected value from the state and finally invoke the funtion passed thought props - pass it pokemon’s id.
+3.6. Add a method to handle click event on the pokemon. It should toggle the collected value from the state and finally invoke the function passed thought props - pass it pokemon’s id.
 3.7. Add a render method with html structure shown below:
-```
+```html
 <li className="pokemon"> 
   <div className="wrapper"> 
     <div className="img-background" /> 
@@ -112,7 +112,7 @@ Go to `src/Search/Search.js`.
 Now, let’s go to `src/SearchInput/SearchInput.js`. 
 
 4.6. We want the render function to generate html of this structure:
-```
+```html
 <form className="search">
   <div className="search-box"> 
     <input type="text" placeholder="Search" /> 
@@ -127,11 +127,11 @@ Now, let’s go to `src/SearchInput/SearchInput.js`.
 
 So far, we covered all basic ideas of React library. We prepared another two components for you to implement, so feel free to proceed further into the tutorial to repeat these ideas. We will give just a brief description of components you are about to implement, they use the concepts you should be already familiar with.
 ## 5. Add Menu with filtering and sorting options
-5.1. Add new fields in search criteria, storing the information about sort key, direction and and filter based upon whether a pokemon is collected (you can implement filter constants from _utils/Filters.js.
+5.1. Add new fields in search criteria, storing the information about sort key, direction and and filter based upon whether a pokemon is collected (you can implement filter constants from `_utils/Filters.js`).
 5.2. Add functions that will handle updating new search criteria and updating search results.
 5.3. Add functions that will handle filtering and sorting given array according to current search criteria. Update function responsible for updating search results. You might also add initial sorting with default criteria after fetching pokemons.
 5.4. Implement Menu component to render html structure shown below:
-```
+```html
 <div className="menu"> 
   <form className="categories"> 
     { customCheckboxes } 
@@ -150,14 +150,14 @@ So far, we covered all basic ideas of React library. We prepared another two com
   </div> 
 </div>
 ```
-Make sure `customCheckboxes` is an array of CustomCheckbox components based off of the array of filters from _utils, that we already implemented it for you. Look at the implementation, to see which props you need to pass it to display it properly.
-5.5. Implement change event handler for select and click event handler for CustomCheckbox.
+Make sure `customCheckboxes` is an array of CustomCheckbox components based off of the array of filters from `_utils`, that we already implemented it for you. Look at the implementation, to see which props you need to pass it to display it properly.
+5.5. Implement change event handler for select and click event handler for `CustomCheckbox`.
 ## 6. Add Filter component
-6.1. To Search component add a new field in search criteria which will store array of currently chosen pokemon types. You can import types from _utils/Filters.js file.
-6.2. Add a function that will take care of updating this field.
-6.3. Add or modify a function to filter given array upon selected types.
+6.1. To Search component add a new field in search criteria which will store array of currently chosen pokemon types. You can import types from `_utils/Filters.js` file. 
+6.2. Add a function that will take care of updating this field. 
+6.3. Add or modify a function to filter given array upon selected types. 
 6.4. Implement Filter component to render html structure:
-```
+```html
 <div className="filter">
   <div className="toggle-filter">
     <span className="filter-icon" /> 
@@ -165,7 +165,7 @@ Make sure `customCheckboxes` is an array of CustomCheckbox components based off 
   </div>
 ``` 
 Underneath that, show this part only is a user has clicked on the `.toggle-filter` element:
-``` 
+```html
   <div className="filter-menu">
     <div className="types">
       <span className="category-title">Pokemon Type</span>
@@ -178,5 +178,5 @@ Underneath that, show this part only is a user has clicked on the `.toggle-filte
   </div>
 </div>
 ```
-6.5. Add a function that will handle opening and closing the menu with filters.
+6.5. Add a function that will handle opening and closing the menu with filters. 
 6.6. Add a click event handler to each type pill, which will add or remove corresponding type from the search criteria object and update the results.
