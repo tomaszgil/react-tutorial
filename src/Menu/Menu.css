@@ -16,12 +16,6 @@
   margin: 0 -15px;
 }
 
-.menu .categories .custom-checkbox {
-  padding: 10px;
-  margin: 5px;
-  color: #bbb;
-}
-
 .menu .categories .custom-checkbox label {
   font-weight: 600;
   transition: .5s;
@@ -97,4 +91,23 @@ select::-ms-expand {
   cursor: pointer;
   box-shadow: 0 3px 0 #e7e6e4;
   transform: translateY(-3px);
+}
+
+@media only screen and (max-width: 768px) {
+  .menu .categories {
+    flex-direction: column;
+  }
+
+  .menu .categories, .menu .sort-by {
+    flex-direction: column;
+  }
+
+  .sorting-category {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .menu .sort-by div {
+    margin-top: 0;
+  }
 }

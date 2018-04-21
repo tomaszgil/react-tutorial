@@ -64,3 +64,18 @@
   opacity: 1;
   transform: translate(0, -50%);
 }
+
+@media only screen and (max-width: 768px) {
+  .search .search-box {
+    width: 100%;
+  }
+
+  .search input,
+  .search input:focus {
+    width: 100%;
+  }
+
+  .search .clear {
+    transition-delay: 0s;
+  }
+}
