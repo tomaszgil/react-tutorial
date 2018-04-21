@@ -35,3 +35,9 @@
 .custom-checkbox.checked {
   color: #2a2825;
 }
+
+@media only screen and (max-width: 768px) {
+  .custom-checkbox {
+    margin: 0 5px;
+  }
+}
