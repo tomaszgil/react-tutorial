@@ -48,13 +48,14 @@
   transform: translate(-50%, 0);
 }
 
-.filter .toggle-filter:hover .filter-icon, .filter .toggle-filter:hover .filter-icon::before, .filter .toggle-filter:hover .filter-icon::after {
+.filter .toggle-filter:hover .filter-icon,
+.filter .toggle-filter:hover .filter-icon::before,
+.filter .toggle-filter:hover .filter-icon::after {
   background-color: #f95979;
 }
 
 .filter .filter-menu {
   display: flex;
-  height: 130px;
   transition: height .3s ease-out;
   animation: slide-in 1s forwards cubic-bezier(.69,.26,.36,.87);
 }
@@ -90,7 +91,7 @@
 }
 
 .filter .filter-menu div .category-items {
-  margin: 15px 0;
+  margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
