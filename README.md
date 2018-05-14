@@ -1,19 +1,32 @@
 # React Tutorial
 
-The purpose of this class is to get familiar with with React library and build a simple Pokedex web application with live search. You’ll learn how to fetch data from external API, about the idea of building UI with independent components, using state and props to update the view and pass data.
+The purpose of this class is to get familiar with with React library and build a simple Pokedex - web application displaying pokemons that allows to perform search and filter. You’ll learn how to fetch data from external API, about the idea of building UI with independent components, using state and props to update the view and pass data.
 ### Get the project’s boilerplate
 Clone the repository and switch to branch `step-1`.
 ```bash
 git clone https://github.com/tomaszgil/react-tutorial.git
 git checkout step-1
 ```
+###Starting the project
+Once you clone the repository install modules and run using npm.
+```bash
+npm install
+npm start
+```
+Alternatively, use yarn.
+```bash
+npm install -g yarn
+yarn
+yarn start
+```
+You should have a development server started at localhost:3000 which has auto reload. Open the code in your preferred editor (we recommend Visual Studio Code or Webstorm).
 ### Got lost? Need help?
 If you cannot figure out a solution at certain point, you can always go back to see the main version of the code on `master` branch or change the branch to next step (name of the branch corresponds to number of the step e.g. branch `step-4` contains completed steps 1, 2 and 3).
 
 ## 1. Create main App component
 First, we need to say, where we want our main App component to render in the html. In public/index.html file we can see, that there is an element with an id of root - we want to render our entire application inside that element. Go to `src/index.js`. 
 
-1.1. Import `App` component from `src/App`.
+1.1. Import `App` component from `src/App/App.js`.
 
 1.2. Render `App` inside the element with an id of `root`.
 
@@ -21,7 +34,7 @@ Go to `src/App/App.js` file. We need to write this component as a class componen
 
 1.3. Import React.
 
-1.4. Create App class that extends React's Component class. Remember to export the component class.
+1.4. Create App class that extends React's Component class. Remember to export the component class after declaring it to be able to import it and use it in other files (use `export default App`).
 
 1.5. Component should have a field to store the data fetched from API.
 
@@ -39,7 +52,7 @@ fetch(dataURL)
   }) 
   .catch(err => console.error(err));
 ```
-Single pokemon should have id, name, image link, type and boolean information whether it is collected or not (initialize it with false, we will deal with it later).
+Single pokemon should have id, name, image link, type (take the first one from array with pokemon's types) and boolean information whether it is collected or not (initialize it with false, we will deal with it later).
 
 1.8. Invoke this function as soon as the component is mounted onto the page.
 
