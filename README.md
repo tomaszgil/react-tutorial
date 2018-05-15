@@ -23,6 +23,14 @@ You should have a development server started at localhost:3000 which has auto re
 ### Got lost? Need help?
 If you cannot figure out a solution at certain point, you can always go back to see the main version of the code on `master` branch or change the branch to next step (name of the branch corresponds to number of the step e.g. branch `step-4` contains completed steps 1, 2 and 3).
 
+### Resources
+
+* [React Documentation](https://reactjs.org/docs/hello-world.html)
+* [Virtual DOM and React Diff Algorithm](http://reactkungfu.com/2015/10/the-difference-between-virtual-dom-and-dom/)
+* [Official React tutorial](https://reactjs.org/tutorial/tutorial.html)
+* [React in 2018](https://tylermcginnis.com/reactjs-tutorial-a-comprehensive-guide-to-building-apps-with-react/)
+
+
 ## 1. Create main App component
 First, we need to say, where we want our main App component to render in the html. In public/index.html file we can see, that there is an element with an id of root - we want to render our entire application inside that element. Go to `src/index.js`. 
 
