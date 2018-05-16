@@ -20,7 +20,7 @@ class Pokemon extends Component {
 //   </div>
 // </li>
 // TODO 3.8. If pokemon is collected, add an extra class of collected to the top li element.
-// TODO 3.9. Add a background color to .img-background element. You can use color map pokemonTypesToColors defined in _utils/Pokemon.js.
+// TODO 3.9. Add a background color to .img-background element. You can use color map pokemonTypesToColors defined in src/_utils/Pokemon.js.
 // TODO 3.10. Change static strings to data received in props and attach method that handles clicking on a pokemon to a.pokeball element.
 }
 

@@ -12,7 +12,7 @@ class Search extends Component {
   }
 
 // TODO Step 3.
-// TODO 3.1. Add a function taking pokemon id as a parameter and toggles the collected field of pokemon with given id.
+// TODO 3.1. Add a method taking pokemon id as a parameter and toggling the collected field of pokemon with given id.
 
   componentWillReceiveProps(nextProps){
     if (nextProps.isFetched) {
@@ -25,7 +25,10 @@ class Search extends Component {
   }
 
   render() {
-    // TODO 3.3. Pass this function to SearchResults component adding next prop.
+    // TODO 3.3. Pass created function to SearchResults component adding next prop. Pay attention to the context of this
+    // TODO      function if you are planning to use this keyword in there. You might need to perform
+    // TODO      this.myMethod = this.myMethod.bind(this) in the constructor to make sure whenever this function
+    // TODO      is called, it has got the right context.
 
     return (
       <div>
