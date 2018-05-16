@@ -22,8 +22,10 @@ class Menu extends Component {
 //   </div>
 // </div>
 // TODO      Make sure customCheckboxes is an array of CustomCheckbox components based off of the array of filters from _utils,
-// TODO      that we already implemented it for you. Look at the implementation, to see which props you need to pass it to display it properly.
-// TODO 5.5. Implement change event handler for select and click event handler for CustomCheckbox.
+// TODO      that we already implemented it for you. Look at the implementation, to see which props you need to pass
+// TODO      to it in order to have them behave properly.
+// TODO 5.5. Implement change event handler for select and click event handler for CustomCheckbox. Remember about binding
+// TODO      this functions if necessary.
 
 }
 

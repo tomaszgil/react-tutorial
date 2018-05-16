@@ -55,9 +55,9 @@ class Search extends Component {
 
 // TODO Step 5.
 // TODO 5.1. Add new fields in search criteria, storing the information about sort key,
-// TODO      direction and and filter based upon whether a pokemon is collected (you can implement filter constants from _utils/Filters.js.
-// TODO 5.2. Add functions that will handle updating new search criteria and updating search results.
-// TODO 5.3. Add functions that will handle filtering and sorting given array according to current search criteria.
+// TODO      direction and and filter based upon whether a pokemon is collected (you can implement filter constants from src/_utils/Filters.js.
+// TODO 5.2. Add methods that will handle updating new search criteria and updating search results.
+// TODO 5.3. Add methods that will handle filtering and sorting given array according to current search criteria.
 // TODO      Update function responsible for updating search results. You might also add initial sorting with default criteria after fetching pokemons.
 
   updateResults() {
