@@ -96,7 +96,7 @@ Go to `src/SearchResults/SearchResults.js`.
 
 2.7. From each element of pokemons array received from we need to create an actual Pokemon component.
 
-#### Hint.
+#### Hint
 You can map over pokemon object received through props, returning Pokemon component to which you will pass all pokemon object’s fields as separate props. React will know how to deal with rendering an array of components. Remember to add a unique key property to the component, when you create a list of element.
 
 2.8. When data is not fetched, let’s have the component return:
