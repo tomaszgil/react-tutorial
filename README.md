@@ -7,7 +7,7 @@ Clone the repository and switch to branch `step-1`.
 git clone https://github.com/tomaszgil/react-tutorial.git
 git checkout step-1
 ```
-###Starting the project
+### Starting the project
 Once you clone the repository install modules and run using npm.
 ```bash
 npm install
