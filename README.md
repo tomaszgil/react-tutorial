@@ -4,7 +4,7 @@ The purpose of this class is to get familiar with React library and build a simp
 
 ### Demo
 
-You can play around with the application over at [tomaszgil.pl/react-tutorial](https://reactjs.org/docs/hello-world.html).
+You can play around with the application over at [tomaszgil.pl/react-tutorial](http://tomaszgil.pl/react-tutorial).
 
 ### Get the project’s boilerplate
 Clone the repository and switch to branch `step-1`.
