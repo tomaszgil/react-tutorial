@@ -13,7 +13,7 @@ If you cannot figure out a solution at certain point, you can always go back to 
 ## 1. Create main App component
 First, we need to say, where we want our main App component to render in the html. In public/index.html file we can see, that there is an element with an id of root - we want to render our entire application inside that element. Go to `src/index.js`. 
 
-1.1. Import `App` component from `src/App`.
+1.1. Import `App` component from `App/App`.
 
 1.2. Render `App` inside the element with an id of `root`.
 
