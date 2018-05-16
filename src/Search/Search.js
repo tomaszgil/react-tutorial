@@ -83,8 +83,8 @@ class Search extends Component {
 
 // TODO Step 6.
 // TODO 6.1. To Search component add a new field in search criteria which will store array of currently chosen pokemon types.
-// TODO      You can import types from _utils/Filters.js file.
-// TODO 6.2. Add a function that will take care of updating this field.
+// TODO      You can import types from src/_utils/Filters.js file.
+// TODO 6.2. Add a method that will take care of updating this field.
 // TODO 6.3. Add or modify a function to filter given array upon selected types.
 
   applyFilters(arr) {

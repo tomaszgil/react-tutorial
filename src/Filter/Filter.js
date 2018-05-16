@@ -26,7 +26,7 @@ class Filter extends Component {
 //     </div>
 //   </div>
 // </div>
-// TODO 6.5. Add a function that will handle opening and closing the menu with filters.
+// TODO 6.5. Add a method that will handle opening and closing the menu with filters.
 // TODO 6.6. Add a click event handler to each type pill, which will add or remove corresponding type from the search criteria object and update the results.
 
 }
