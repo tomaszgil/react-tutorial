@@ -2,7 +2,7 @@ import './App.css';
 
 // TODO 1.3. Import React.
 // TODO 1.4. Create App class that extends React's Component class. Remember to export the component class
-// TODO      after declaring it to be able to import it and use it in other files (use export default App).
+// TODO      after declaring it in order to be able to import it and use it in other files (use export default App).
 // TODO 1.5. Component should have a field to store the data fetched from API.
 // TODO 1.6. Initialize the state of the component to have a single variable that indicates whether the data has been already fetched or not.
 // TODO 1.7. Create a method that will fetch a pokemon array from this URL:
