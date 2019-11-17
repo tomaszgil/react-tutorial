@@ -1,53 +1,40 @@
-import React, { Component } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Logo from '../Logo/Logo';
 import Search from '../Search/Search';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const apiAccessKey = 'RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh';
 
-    this.apiAccessKey = "RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh";
-    this.allPokemons = [];
+  const [isFetched, setIsFetched] = useState(false);
 
-    this.state = {
-      isFetched: false
-    };
+  const allPokemons = useRef([]);
 
-    this.fetchPokemons = this.fetchPokemons.bind(this);
-  }
+  useEffect(() => { fetchPokemons() }, []);
 
-  componentDidMount() {
-    this.fetchPokemons();
-  }
-
-  fetchPokemons() {
-    fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
+  const fetchPokemons = () => {
+    fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${apiAccessKey}`)
       .then(blob => blob.json())
       .then(data => {
-        this.allPokemons = data.map(element => ({
-          name: element.name,
-          id: element.id,
-          img: element.image,
-          type: element.types[0],
-          collected: false
+          allPokemons.current = data.map(element => ({
+            name: element.name,
+            id: element.id,
+            img: element.image,
+            type: element.types[0],
+            collected: false
         }));
-
-        this.setState({
-          isFetched: true,
-        });
+        setIsFetched(true);
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  render() {
-    return (
-      <div className="app">
-        <Logo />
-        <Search pokemons={this.allPokemons} isFetched={this.state.isFetched} />
-      </div>
-    );
-  }
-}
+
+  return (
+    <div className="app">
+      <Logo />
+      <Search pokemons={allPokemons.current} isFetched={isFetched} />
+    </div>
+  );
+};
 
 export default App;

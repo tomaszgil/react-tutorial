@@ -1,40 +1,30 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import './SearchInput.css';
 
-class SearchInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
+const SearchInput = (props) => {
+    const [value, setValue] = useState('');
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-  }
+    const handleChange = (e) => {
+        const query = e.target.value;
+        setValue(query);
+        props.onChange(query);
+    };
 
-  handleChange(e) {
-    const query = e.target.value;
-    this.setState({ value: query });
-    this.props.onChange(query);
-  }
+    const handleClear = (e) => {
+        e.preventDefault();
+        setValue('');
+        props.onChange('');
+    };
 
-  handleClear(e) {
-    e.preventDefault();
-    this.setState({
-      value: ''
-    });
-    this.props.onChange('');
-  }
-
-  render() {
     return (
-      <form className="search" onSubmit={(e) => e.preventDefault()}>
-        <div className="search-box">
-          <input type="text" placeholder="Search" value={this.state.value} onChange={this.handleChange}/>
-          <div className="icon" />
-          <a href="#" className={this.state.value !== '' ? "clear visible" : "clear"}  onClick={this.handleClear} />
-        </div>
-      </form>
+        <form className="search" onSubmit={(e) => e.preventDefault()}>
+            <div className="search-box">
+                <input type="text" placeholder="Search" value={value} onChange={handleChange}/>
+                <div className="icon"/>
+                <a href="#" className={value !== '' ? "clear visible" : "clear"} onClick={handleClear}/>
+            </div>
+        </form>
     );
-  }
-}
+};
 
 export default SearchInput;

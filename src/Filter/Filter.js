@@ -1,73 +1,62 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import './Filter.css';
-import { pokemonTypes, pokemonTypesToColors } from "../_utils/Pokemon";
+import {pokemonTypes, pokemonTypesToColors} from "../_utils/Pokemon";
 
-class Filter extends Component {
-  constructor(props) {
-    super(props);
+const Filter = (props) => {
+    const [showMenu, setShowMenu] = useState(false);
+    const [typeFilters, setTypeFilters] = useState(new Set(pokemonTypes));
 
-    this.state = {
-      showMenu: false,
-      typeFilters: new Set(pokemonTypes)
+    const toggleFilter = () => {
+        setShowMenu(!showMenu);
     };
 
-    this.toggleFilter = this.toggleFilter.bind(this);
-    this.applyFilter = this.applyFilter.bind(this);
-  }
+    const applyFilter = (e) => {
+        const filterElement = e.target;
+        const filterName = filterElement.dataset.name;
+        let newFilters = typeFilters;
 
-  toggleFilter() {
-    this.setState({
-      showMenu: !this.state.showMenu
-    });
-  }
+        if (typeFilters.has(filterName)) {
+            newFilters.delete(filterName);
+            filterElement.classList.add('disabled');
+        } else {
+            newFilters.add(filterName);
+            filterElement.classList.remove('disabled');
+        }
 
-  applyFilter(e) {
-    const filterElement = e.target;
-    const filterName = filterElement.dataset.name;
-    let newFilters = this.state.typeFilters;
+        setTypeFilters(newFilters);
+        props.onChange(Array.from(newFilters));
+    };
 
-    if (this.state.typeFilters.has(filterName)) {
-      newFilters.delete(filterName);
-      filterElement.classList.add('disabled');
-    } else {
-      newFilters.add(filterName);
-      filterElement.classList.remove('disabled');
-    }
-
-    this.setState({
-      typeFilters: newFilters
-    });
-    this.props.onChange(Array.from(newFilters));
-  }
-
-  render() {
     return (
-      <div className="filter">
-        <div className="toggle-filter" onClick={this.toggleFilter}>
-          <span className="filter-icon" />
-          <span className="filter-text">Filter Pokedex</span>
-        </div>
+        <div className="filter">
+            <div className="toggle-filter" onClick={toggleFilter}>
+                <span className="filter-icon"/>
+                <span className="filter-text">Filter Pokedex</span>
+            </div>
 
-        {this.state.showMenu &&
-          <div className="filter-menu">
-            <div className="types">
-              <span className="category-title">Pokemon Type</span>
-              <span className="category-items">
+            {showMenu &&
+            <div className="filter-menu">
+                <div className="types">
+                    <span className="category-title">Pokemon Type</span>
+                    <span className="category-items">
               {
-                pokemonTypes.map(type => <div
-                    key={type}
-                    data-name={type}
-                    style={{backgroundColor: pokemonTypesToColors[type], border: `2px solid ${pokemonTypesToColors[type]}`}}
-                    onClick={this.applyFilter}>{type}
+                  pokemonTypes.map(type => <div
+                      key={type}
+                      data-name={type}
+                      style={{
+                          backgroundColor: pokemonTypesToColors[type],
+                          border: `2px solid ${pokemonTypesToColors[type]}`
+                      }}
+                      onClick={applyFilter}>{type}
                   </div>)
               }
-              </span>
+            </span>
+                </div>
             </div>
-          </div>
-        }
-      </div>
+            }
+        </div>
     );
-  }
-}
+
+};
 
 export default Filter;
