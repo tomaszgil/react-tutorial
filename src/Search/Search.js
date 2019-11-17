@@ -1,146 +1,140 @@
-import React, { Component } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Menu from '../Menu/Menu';
 import Filter from '../Filter/Filter';
 import SearchInput from '../SearchInput/SearchInput';
 import SearchResults from '../SearchResults/SearchResults';
-import { pokemonTypes } from '../_utils/Pokemon';
+import {pokemonTypes} from '../_utils/Pokemon';
 import filters from '../_utils/Filters';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.allPokemons = this.props.pokemons;
-
-    this.state = {
-      pokemons: this.allPokemons
-    };
-
-    this.criteria = {
-      searchQuery: '',
-      sort: {
+const initialCriteria = {
+    searchQuery: '',
+    sort: {
         key: 'id',
         direction: 'ascending'
-      },
-      filter: {
+    },
+    filter: {
         types: pokemonTypes,
         collected: filters.SHOW_ALL
-      }
+    }
+};
+
+const Search = (props) => {
+    const [pokemons, setPokemons] = useState(props.pokemons);
+
+    const allPokemons = useRef([]);
+    const criteria = useRef(initialCriteria);
+
+    useEffect(() => {
+        updateResults()
+    }, []);
+
+    useEffect(() => {
+        if (props.isFetched) {
+            allPokemons.current = props.pokemons;
+            updateResults();
+        }
+    }, [props]);
+
+
+
+    const handlePokemonStateChange = (id) => {
+        const pokemon = allPokemons.current.find(pokemon => pokemon.id === id);
+        pokemon.collected = !pokemon.collected;
     };
 
-    this.handleSorting = this.handleSorting.bind(this);
-    this.handleSearchQuery = this.handleSearchQuery.bind(this);
-    this.handleFilterTypes = this.handleFilterTypes.bind(this);
-    this.handleFilterCollected = this.handleFilterCollected.bind(this);
-    this.handlePokemonStateChange = this.handlePokemonStateChange.bind(this);
-    this.sort = this.sort.bind(this);
-    this.processSearchQuery = this.processSearchQuery.bind(this);
-    this.applyFilters = this.applyFilters.bind(this);
-    this.updateResults = this.updateResults.bind(this);
-  }
+    const handleSearchQuery = (query) => {
+        criteria.current.searchQuery = query;
+        updateResults();
+    };
 
-  componentDidMount() {
-    this.updateResults();
-  }
+    const handleFilterTypes = (types) => {
+        criteria.current.filter.types = types;
+        updateResults();
+    };
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.isFetched) {
-      this.allPokemons = nextProps.pokemons;
-      this.updateResults();
-    }
-  }
+    const handleFilterCollected = (filter) => {
+        criteria.current.filter.collected = filter;
+        updateResults();
+    };
 
-  handlePokemonStateChange(id) {
-    const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
-    pokemon.collected = !pokemon.collected;
-  }
+    const handleSorting = (key, direction) => {
+        criteria.current.sort.key = key;
+        criteria.current.sort.direction = direction;
+        updateResults();
+    };
 
-  handleSearchQuery(query) {
-    this.criteria.searchQuery = query;
-    this.updateResults();
-  }
+    const sort = (arr) => {
+        let multiplier = 1;
+        const key = criteria.current.sort.key;
 
-  handleFilterTypes(types) {
-    this.criteria.filter.types = types;
-    this.updateResults();
-  }
+        switch (criteria.current.sort.direction) {
+            case 'ascending':
+                multiplier = 1;
+                break;
+            case 'descending':
+                multiplier = -1;
+                break;
+            default:
+                break;
+        }
 
-  handleFilterCollected(filter) {
-    this.criteria.filter.collected = filter;
-    this.updateResults();
-  }
+        return arr.sort((a, b) => {
+            if (a[key] < b[key]) return -1 * multiplier;
+            if (a[key] === b[key]) return 0;
+            if (a[key] > b[key]) return multiplier;
 
-  handleSorting(key, direction) {
-    this.criteria.sort.key = key;
-    this.criteria.sort.direction = direction;
-    this.updateResults();
-  }
+            return 0;
+        });
+    };
 
-  sort(arr) {
-    let multiplier = 1;
-    const key = this.criteria.sort.key;
+    const processSearchQuery = (arr) => {
+        const template = criteria.current.searchQuery.toLowerCase();
+        const fields = ['name', 'type', 'id'];
 
-    switch(this.criteria.sort.direction) {
-      case 'ascending': multiplier = 1; break;
-      case 'descending': multiplier = -1; break;
-      default: break;
-    }
+        return arr.filter(pokemon => {
+            for (let field of fields)
+                if (pokemon[field].toString().toLowerCase().includes(template))
+                    return true;
 
-    return arr.sort((a, b) => {
-      if (a[key] < b[key]) return -1 * multiplier;
-      if (a[key] === b[key]) return 0;
-      if (a[key] > b[key]) return multiplier;
+            return false;
+        });
+    };
 
-      return 0;
-    });
-  }
+    const applyFilters = (arr) => {
+        let result = [];
+        switch (criteria.current.filter.collected) {
+            case filters.SHOW_ALL:
+                result = arr;
+                break;
+            case filters.ONLY_COLLECTED:
+                result = arr.filter(el => el.collected);
+                break;
+            case filters.NOT_COLLECTED:
+                result = arr.filter(el => !el.collected);
+                break;
+            default:
+                result = arr;
+        }
+        result = result.filter(pokemon => criteria.current.filter.types.includes(pokemon.type));
+        return result;
+    };
 
-  processSearchQuery(arr) {
-    const template = this.criteria.searchQuery.toLowerCase();
-    const fields = ['name', 'type', 'id'];
+    const updateResults = () => {
+        let result = applyFilters(allPokemons.current);
+        result = processSearchQuery(result);
+        result = sort(result);
+        setPokemons(result);
+    };
 
-    return arr.filter(pokemon => {
-      for (let field of fields)
-        if (pokemon[field].toString().toLowerCase().includes(template))
-          return true;
-
-      return false;
-    });
-  }
-
-  applyFilters(arr) {
-    let result = [];
-    switch(this.criteria.filter.collected) {
-      case filters.SHOW_ALL: result = arr; break;
-      case filters.ONLY_COLLECTED: result = arr.filter(el => el.collected); break;
-      case filters.NOT_COLLECTED: result = arr.filter(el => !el.collected); break;
-      default: result = arr;
-    }
-
-    result = result.filter(pokemon => this.criteria.filter.types.includes(pokemon.type));
-    return result;
-  }
-
-  updateResults() {
-    let result = this.applyFilters(this.allPokemons);
-        result = this.processSearchQuery(result);
-        result = this.sort(result);
-
-    this.setState({
-      pokemons: result
-    });
-  }
-
-  render() {
     return (
-      <div>
-        <SearchInput onChange={this.handleSearchQuery} />
-        <Menu onFilterChange={this.handleFilterCollected} onSortChange={this.handleSorting} />
-        <Filter onChange={this.handleFilterTypes} />
-        <SearchResults pokemons={this.state.pokemons} isFetched={this.props.isFetched} onPokemonCheck={this.handlePokemonStateChange} />
-      </div>
+        <div>
+            <SearchInput onChange={handleSearchQuery}/>
+            <Menu onFilterChange={handleFilterCollected} onSortChange={handleSorting}/>
+            <Filter onChange={handleFilterTypes}/>
+            <SearchResults pokemons={pokemons} isFetched={props.isFetched} onPokemonCheck={handlePokemonStateChange}/>
+        </div>
 
     );
-  }
-}
+};
 
 export default Search;

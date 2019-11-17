@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Pokemon from '../Pokemon/Pokemon';
 import './SearchResults.css';
 
-const PokemonContainer = ({ pokemons, isFetched, onPokemonCheck }) => {
-  const pokemonsComponents = pokemons
-    .map(pokemon => <Pokemon key={pokemon.id} {...pokemon} onPokemonCheck={onPokemonCheck} />);
+const PokemonContainer = ({pokemons, isFetched, onPokemonCheck}) => {
+    const pokemonsComponents = pokemons
+        .map(pokemon => <Pokemon key={pokemon.id} {...pokemon} onPokemonCheck={onPokemonCheck}/>);
 
-  if (!isFetched)
+    if (!isFetched)
+        return (
+            <div className="pokemon-container-loading">
+                <div className="pokemon"/>
+            </div>
+        );
+
     return (
-      <div className="pokemon-container-loading">
-        <div className="pokemon" />
-      </div>
+        <ul className="pokemon-container">
+            {pokemonsComponents}
+        </ul>
     );
-
-  return (
-    <ul className="pokemon-container">
-      {pokemonsComponents}
-    </ul>
-  );
 
 };
 

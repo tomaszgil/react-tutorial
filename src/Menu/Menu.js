@@ -1,70 +1,58 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import './Menu.css';
 import CustomCheckbox from './../CustomCheckbox/CustomCheckbox';
 import filters from './../_utils/Filters';
 
-class Menu extends Component {
-  constructor(props) {
-    super(props);
+const filtersList = [
+    filters.SHOW_ALL,
+    filters.ONLY_COLLECTED,
+    filters.NOT_COLLECTED
+];
 
-    this.state = {
-      filterChecked: filters.SHOW_ALL
+const Menu = (props) => {
+    const [filterChecked, setFilterChecked] = useState(filters.SHOW_ALL);
+
+    const sortingCategory = React.createRef();
+    const sortingDirection = React.createRef();
+
+    const handleCheckboxClick = (filter) => {
+        setFilterChecked(filter);
+        props.onFilterChange(filter);
     };
 
-    this.filtersList = [
-      filters.SHOW_ALL,
-      filters.ONLY_COLLECTED,
-      filters.NOT_COLLECTED
-    ];
+    const handleSortingOptionChange = () => {
+        const category = sortingCategory.current.value;
+        const direction = sortingDirection.current.value;
+        props.onSortChange(category, direction);
+    };
 
-    this.sortingCategory = React.createRef();
-    this.sortingDirection = React.createRef();
-    this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
-    this.handleSortingOptionChange = this.handleSortingOptionChange.bind(this);
-  }
-
-  handleCheckboxClick(filter) {
-    this.setState({
-      filterChecked: filter
-    });
-
-    this.props.onFilterChange(filter);
-  }
-
-  handleSortingOptionChange() {
-    const category = this.sortingCategory.current.value;
-    const direction = this.sortingDirection.current.value;
-    this.props.onSortChange(category, direction);
-  }
-
-  render() {
     return (
-      <div className="menu">
-        <form className="categories" onSubmit={(e) => e.preventDefault()}>
-          {
-            this.filtersList.map((label, index) => {
-              const checked = label === this.state.filterChecked;
-              return (
-                <CustomCheckbox key={index} id={label} checked={checked} label={label} onClick={this.handleCheckboxClick} />
-              );
-            })
-          }
-        </form>
-        <div className="sort-by">
-          <div className="sorting-title">Sort by</div>
-          <select className="sorting-category" ref={this.sortingCategory} onChange={this.handleSortingOptionChange}>
-            <option value="id">id</option>
-            <option value="name">name</option>
-            <option value="type">type</option>
-          </select>
-          <select className="sorting-direction" ref={this.sortingDirection} onChange={this.handleSortingOptionChange}>
-            <option value="ascending">low to high</option>
-            <option value="descending">high to low</option>
-          </select>
+        <div className="menu">
+            <form className="categories" onSubmit={(e) => e.preventDefault()}>
+                {
+                    filtersList.map((label, index) => {
+                        const checked = label === filterChecked;
+                        return (
+                            <CustomCheckbox key={index} id={label} checked={checked} label={label}
+                                            onClick={handleCheckboxClick}/>
+                        );
+                    })
+                }
+            </form>
+            <div className="sort-by">
+                <div className="sorting-title">Sort by</div>
+                <select className="sorting-category" ref={sortingCategory} onChange={handleSortingOptionChange}>
+                    <option value="id">id</option>
+                    <option value="name">name</option>
+                    <option value="type">type</option>
+                </select>
+                <select className="sorting-direction" ref={sortingDirection} onChange={handleSortingOptionChange}>
+                    <option value="ascending">low to high</option>
+                    <option value="descending">high to low</option>
+                </select>
+            </div>
         </div>
-      </div>
     );
-  }
-}
+};
 
 export default Menu;

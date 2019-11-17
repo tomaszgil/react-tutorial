@@ -2,6 +2,9 @@
 
 The purpose of this class is to get familiar with React library and build a simple Pokedex - web application displaying pokemons that allows to perform live searching and filtering. You’ll learn how to fetch data from external API, about the idea of building UI with independent components, using state and props to update the view and pass data.
 
+Tutorial  has been changed keeping in mind the latest React trends - Hooks and functional approach components.
+React hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.
+
 ### Demo
 
 You can play around with the application over at [tomaszgil.pl/react-tutorial](http://tomaszgil.pl/react-tutorial).
@@ -37,7 +40,8 @@ The tutorial is designed in a way that your code **might not fully work** after 
 * [Virtual DOM and React Diff Algorithm](http://reactkungfu.com/2015/10/the-difference-between-virtual-dom-and-dom/)
 * [Official React tutorial](https://reactjs.org/tutorial/tutorial.html)
 * [React in 2018](https://tylermcginnis.com/reactjs-tutorial-a-comprehensive-guide-to-building-apps-with-react/)
-
+* [React Hooks](https://tylermcginnis.com/why-react-hooks/)
+* [React Hooks Introduction [PL]](https://typeofweb.com/react-hooks-wprowadzenie-i-motywacja/)
 
 ## 1. Create main App component
 First, we need to say, where we want our main App component to render in the html. In `public/index.html` file we can see, that there is an element with an id of root - we want to render our entire application inside that element. Go to `src/index.js`. 
